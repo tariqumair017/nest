@@ -1,0 +1,65 @@
+YT => https://youtu.be/K_OjtrsJGTk?si=y41ujnX7cLAEQUbl
+- Node.js (Run time environment for javascript. We install node.js in our system which will help javascript to run in our system. So conclusion is node.js runtime helps javascript to run out side the browser). 
+- Nest.js (Node.js framework for building efficient and scalable server side application. Built in TypeScript. Uses modular architecture for better organization)
+- Why need nest when we have express (Simplify development using modern architecture. Provides structured way to build scalable and testable application. Solves limitaions of traditional express apps)
+      - Express is unopinionated (structure could be so much complex (It's Unstructured. each developer can create folders and files as per their understanding that makes difficulty to understand each other's code))
+      - Nest is opinionated (have a proper defined structure, also provide so much built in support like built-in dependency Injection system, integration with databases, sockets, GraphQL, Microservices and many more built in supports are available)
+- npm i -g @nestjs/cli    (nest comes with rebust of cli commands)
+- nest new project-name   (cli example to create new nest project)
+- Folders
+      - .prettierrc  (prettier is a tool for code formatting rules, like remove spaces etc)
+      - eslint.config.mjs  (gives warrnings and errors to follows nest.js)
+- Decorators 
+      - Special functions that add metadata (metadata means to providing special features) to classes or methods 
+      - Start with @ symbol as @Get, @Controller 
+      - Tell NestJs how to treat the class or method
+      - Used for routing, dependency injection, validation, etc
+- Dependency Injection 
+      - Mechanism where nest framework automatically provides the required dependencies without creating them manually
+      - eg: constructor(private readonly userService: UserService) {}
+      - Make code reuseable and clean. Improve readability and maintainability
+      - Make testing easy
+- API (Application Programming Interface)
+      - Allow two applications to talk to each other
+      - Bridge between frontend and backend
+- REST API (Representational State Transfer) 
+      - API that follow certain rules
+      - Use HTTP methods like GET, POST, Delete
+      - Simple, scalable and stateless communication (Stateless means no need to store anything, request generate hoi, response howa no storage use nothing)
+- DTO (Data Transfer Object)
+      - Provide security and validation
+      - Use to define the shape of incoming request data (ensures only required data is passed)
+- Interface (It's a Typescript)
+      - Define the structure (type) of object
+      - Write clean, structured, type-safe code
+      - Used for both request (DTOs) and response objects
+- Important (Only dto never works in runtime because on runtime typescript types and classes are removed. So we will use class-validator and class-transformer)
+      - class-validator: It validates typescript classes properties by decorators
+      - class-transformer: Helps to convert plain json object (frontend request data) to class instances so that class-validator can validate. Because class-validator only validate class instances not json objects
+- Custom Pipes: Mostly used in main.ts as app.useGlobalPipes()
+      - Pipes are used to transform or validate incoming data (Nest allow you to create your own pipes) or business logic filtering
+     Imp - Pipe runs before the data hits the route handler controller method (Global pipes in main.ts, controller level pipes)
+      - Best practice "nest g pipe common/pipes/uppercase"
+- Protect Routes Guards
+      - Guards are classes that implement logic to decide whether a request is allowed or not 
+
+
+
+
+
+#############
+Commands
+############
+npm i -g nest
+nest new --skip-git     (nest cli)
+
+nest g mo shared
+nest g co shared
+nest g s shared
+rm -rf src/shared
+
+nest g mo shared --no-spec (-d)
+nest g mo shared --dry-run (-d)
+
+Complete Resource:
+nest g resource shared --no-spec

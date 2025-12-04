@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  phone     String   @unique
+  name      String?
+  age       Int?
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // One-to-many relation
+  watches Watch[]
+
+  @@map("users")
+}
+
+model Watch {
+  id         String   @id @default(uuid())
+  name       String
+  brand      String
+  price      Float?
+  purchaseAt DateTime @default(now())
+  userId     String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("watches")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
