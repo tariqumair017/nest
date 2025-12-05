@@ -1,0 +1,84 @@
+AWS Lambda with MongoDB & NodeJS: https://youtu.be/6oR9u7Gb0bU?si=Z0QqC0O7JdgVHgUY
+Each Microservices (project) can be a collection of one or more Lambda functions exposed via API Gateway.
+
+- AWS Lambda: This is a compute service that lets you run code without provisioning or managing servers. You upload your code (e.g., Node.js), and Lambda executes it in response to events (like an HTTP request).
+        - Low pricing (very cheap, $0.20 per 1M requests)
+        - No need to manage scaling like a Server (EC2), Lambda Automatically upscale and downscale according to request load
+- API Gateway: This is a fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs at any scale. It acts as the "front door" for your applications, handling routing, authentication, and more.
+ 
+- How to Integrate Lambda and API Gateway in Your Node.js Project
+	- AWS Console & CLI: Manually create functions, API Gateway endpoints, and integrations. Good for learning the basics.
+	- Infrastructure as Code (IaC) - Recommended for Production: Use tools like AWS Serverless Application Model (SAM), Serverless Framework, or AWS CloudFormation/CDK to define your Lambda functions, API Gateway, and other AWS resources in code. This makes deployments repeatable and manageable.
+
+1. API Gateway Endpoint Types:
+	- REST API (Edge-optimized, Regional, Private): The most common type, excellent for public-facing HTTP APIs. 
+		- Edge-optimized: Default, uses CloudFront for lower latency for global clients.
+		- Regional: For clients in the same AWS region, often cheaper if you don't need global distribution.
+		- Private: Accessible only from within your VPC using a VPC Endpoint (for internal services).
+	- HTTP API
+	- WebSocket API
+	- GraphQL API (AWS AppSync)
+
+2. Lambda Integration Types with API Gateway:
+	- Lambda Proxy Integration (Recommended)
+	- Lambda Non-Proxy Integration (Custom Integration)
+
+3. API Gateway Authorizers:
+	- IAM Authorizers: Use AWS IAM roles/policies to control access.
+	- AWS Cognito: (two ways, User and Identity Pools)
+             1) User Pool Authorizers: Don't build your own authentication system. Integrate directly with Amazon Cognito User Pools for user authentication.
+             2) Identity Pools Authorizers: 
+               => User authenticate with (send) credentials to Amazon Cognito
+               => Amazon Cognito send auth token back to user
+               => Then with this token, user authenticate with API Gateway
+               => Then API Gateway invoke lambda function
+               => Youtube: https://youtu.be/kheoHllI8ec?si=7pe8FmL1klq6ddXh
+               => AWS Cognito Documentation: https://docs.aws.amazon.com/cognito/
+	- Lambda Authorizers (Custom Authorizers): A Lambda function that authenticates requests and returns an IAM policy.
+		- Type Token: Expects an authentication token in a header.
+		- Type Request: Can inspect any part of the request (headers, query parameters, body) to make an authorization decision.
+		- Use Case: Integrate with existing OAuth/JWT providers or implement custom authorization logic.
+
+4. Lambda for Backend Processing (Event-Driven):
+	- Beyond API Gateway, Lambda is a powerhouse for asynchronous and event-driven tasks:
+		- S3 Event Triggers: Process images uploaded to S3 (resize, watermarks), process data files.
+		- DynamoDB Streams: React to changes in your DynamoDB tables (e.g., update search indexes, send notifications).
+		- SQS Queue Triggers: Process messages from queues asynchronously (like our email example).
+		- SNS Topic Subscriptions: Respond to notifications published to SNS topics.
+		- CloudWatch Events/EventBridge: Schedule tasks (cron jobs) or react to AWS service events.
+		- Kinesis Streams/Firehose: Process real-time streaming data.
+		- API Gateway WebSocket API: Handle connection, disconnection, and message routing for WebSockets.
+
+- Lambda’s cold starts
+	- Cold starts are an inherent trade-off for the serverless model's cost efficiency and auto-scaling. You only pay for what you use, and AWS doesn't keep idle containers running for you.
+
+- CloudWatch
+	- Amazon CloudWatch is a monitoring and observability service built for DevOps engineers, developers, site reliability engineers (SREs), and IT managers. It provides data and actionable insights to monitor your applications.
+	- Metrics: Collects and tracks metrics for your AWS resources (EC2, Lambda, S3, RDS, etc.) and applications.
+		- Example: Lambda invocation count, error rate, duration, billed duration. MongoDB Atlas also integrates to push its metrics to CloudWatch.
+	- Logs: Centralizes logs from all your AWS resources and applications.
+		- Example: All console.log statements from your Lambda functions automatically go to CloudWatch Logs. You can also send logs from your MongoDB instances if they're self-hosted on EC2.
+	- Alarms: Allows you to set thresholds on metrics and receive notifications when those thresholds are breached.
+		- Example: Get an SNS notification if your Lambda error rate exceeds 5% for 5 minutes, or if your MongoDB CPU utilization goes above 90%.
+	- Dashboards: Create custom visualizations of your metrics and logs to get a holistic view of your application health.
+	- Events (now EventBridge): Delivers a near real-time stream of system events that describe changes in AWS resources.
+		- Example: Triggers a Lambda function when an S3 object is created, on a schedule (cron), or when another AWS service emits an event.
+
+Best Practices: 
+- Security: Use IAM roles: IAM (Identity and Access Management) roles define permissions for AWS entities (like your Lambda function). Instead of hardcoding credentials, your Lambda function assumes a specific IAM role when it executes.
+- API Gateway Authentication (How to Authenticate API Gateway?): API Gateway offers several powerful authentication/authorization mechanisms:
+	- API Keys: Simple rate limiting and basic usage tracking. Not for strong security.
+	- AWS IAM (SigV4): For internal, AWS-to-AWS communication or clients that can manage AWS credentials (e.g., another Lambda, an EC2 instance, or a mobile app using AWS Amplify).
+	- Cognito User Pools Authorizer: Managed user authentication for web and mobile apps. Integrates directly with AWS Cognito User Pools. Clients authenticate with Cognito, get a JWT, and send it in the Authorization header.
+	- Lambda Authorizer (Custom Authorizer): For highly customized authentication/authorization logic (e.g., integrating with a custom OAuth provider, validating custom tokens, complex RBAC).
+- X-Ray tracing (Logging/Monitoring): Provides end-to-end visibility into your application, showing how requests flow through various services (API Gateway, Lambda, S3, external calls). It helps identify performance bottlenecks and errors across distributed systems. 
+- Environment Variables: (How to store, fetch, and manage): 
+	- Lambda Console: You can manually add environment variables directly in the Lambda console. This is fine for small projects but not ideal for IaC.
+	- Deployment Tools (Recommended): Use serverless.yml (or SAM, CloudFormation) to define them.
+	- Securely Storing Secrets: AWS Systems Manager Parameter Store (SSM PS): Best for non-rotating secrets like database connection strings or API keys. Use SecureString type.
+
+
+// Extra topics (Not AWS Topic)
+- Streaming in node.js (piece by piece data on scrole as reels)
+	- Streaming involves processing data in chunks rather than loading it all into memory at once. In Node.js, this is achieved using Readable and Writable Streams. This is crucial for handling large datasets efficiently.
+	- Types of Streaming Usage: Readable Streams (Reading data from a source.), Writable Streams (Writing data to a destination), Duplex Streams, Transform Streams
