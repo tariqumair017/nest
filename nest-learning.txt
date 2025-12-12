@@ -1,4 +1,10 @@
-YT => https://youtu.be/K_OjtrsJGTk?si=y41ujnX7cLAEQUbl
+YT => https://www.youtube.com/watch?v=K_OjtrsJGTk&list=PL5OhSdfH4uDt6iG-qze_Q3qgik6VKHeRU
+
+// .env
+PORT=8888
+DATABASE_URL=postgresql://postgres:password@localhost:5432/nest-db
+JWT_SECRET=gjyg$%&*!$^*8^hgyu76eryskdtkmdgnrasgzd
+
 - Node.js (Run time environment for javascript. We install node.js in our system which will help javascript to run in our system. So conclusion is node.js runtime helps javascript to run out side the browser). 
 - Nest.js (Node.js framework for building efficient and scalable server side application. Built in TypeScript. Uses modular architecture for better organization)
 - Why need nest when we have express (Simplify development using modern architecture. Provides structured way to build scalable and testable application. Solves limitaions of traditional express apps)
@@ -16,7 +22,7 @@ YT => https://youtu.be/K_OjtrsJGTk?si=y41ujnX7cLAEQUbl
       - Used for routing, dependency injection, validation, etc
 - Dependency Injection 
       - Mechanism where nest framework automatically provides the required dependencies without creating them manually
-      - eg: constructor(private readonly userService: UserService) {}
+      - eg: constructor(private readonly userService: UserService) {}    (injecting UserService in controller or anywhere as userService)
       - Make code reuseable and clean. Improve readability and maintainability
       - Make testing easy
 - API (Application Programming Interface)
@@ -25,7 +31,7 @@ YT => https://youtu.be/K_OjtrsJGTk?si=y41ujnX7cLAEQUbl
 - REST API (Representational State Transfer) 
       - API that follow certain rules
       - Use HTTP methods like GET, POST, Delete
-      - Simple, scalable and stateless communication (Stateless means no need to store anything, request generate hoi, response howa no storage use nothing)
+      - Simple, scalable and stateless communication (Stateless means no need to store anything, request generate hoi, response howa no storage use, nothing)
 - DTO (Data Transfer Object)
       - Provide security and validation
       - Use to define the shape of incoming request data (ensures only required data is passed)
@@ -36,14 +42,43 @@ YT => https://youtu.be/K_OjtrsJGTk?si=y41ujnX7cLAEQUbl
 - Important (Only dto never works in runtime because on runtime typescript types and classes are removed. So we will use class-validator and class-transformer)
       - class-validator: It validates typescript classes properties by decorators
       - class-transformer: Helps to convert plain json object (frontend request data) to class instances so that class-validator can validate. Because class-validator only validate class instances not json objects
-- Custom Pipes: Mostly used in main.ts as app.useGlobalPipes()
+- Custom Pipes: Mostly used in main.ts Example: app.useGlobalPipes()
       - Pipes are used to transform or validate incoming data (Nest allow you to create your own pipes) or business logic filtering
-     Imp - Pipe runs before the data hits the route handler controller method (Global pipes in main.ts, controller level pipes)
+     Imp - Pipe runs before the data hits the route handler controller method (Global pipes in main.ts, also can  create controller level pipes)
       - Best practice "nest g pipe common/pipes/uppercase"
 - Protect Routes Guards
       - Guards are classes that implement logic to decide whether a request is allowed or not 
+      - Implement by CanActivate interface
+      - Mostly used for Authentication and Authorization
+- Exception Filters  (nest g filter filters/http-exception)
+      - Handle errors and exceptions in a centralized way
+      - Can be apply at method level, controller level, or globally (main.ts)
+      - @catch() decorator is used to defined which exception the filter will handle 
+- Middleware (Middleware vs Guard)
+      - Middleware is afunction which runs before request reach to controller
+      - Use cases:
+          - Logging the request
+	  - Auth token (like jwt)
+	  - Request transformation (like converting string to number)
+	  - Blocking, redirecting requests
+	  - Setting headers 
+      - Middleware vs Guard:
+          - Guard is a nest.js concept (can't use in express, It's advance concept used in nest.js) and Middleware is express.js concept
+	  - Can not use decorators in Middleware as It's a express.js concept
+      - Guard:
+	  - Before route is accessed (based on auth), authorization (role check, access allowed)
+      - Middleware:
+	  - Before controller, common tasks (logging, token decode)
 
-
+- Lifecycle Events (also called "special methods", "lifecycle methods", "Hooks") (nest will call this special method on a event trigger)
+      - Automatically nest.js called at different stages of module/service/component's life
+      - Used to perform actions during creation or destruction
+      - Helps run some code when app/modulw/service initialized or destroyed.
+      - Useful for tasks like DB connections, logging, resource cleanup etc.
+      - onModuleInit() => called when a module is initialized, onApplicationShutdown() => called when app is shutting down
+- Environment Variables
+      - npm i @nestjs/config   (for config environment variables)
+      - app.modules.ts => import { ConfigModule } from '@nestjs/config';  => inside imports: [ConfigModule.forRoot({isGlobal: true})]
 
 
 

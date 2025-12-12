@@ -1,12 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ParseUUIDPipe, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ParseUUIDPipe, Request, UseFilters } from '@nestjs/common';
 import { WatchService } from './watch.service';
 import { CreateWatchDto, UpdateWatchDto } from './dto'; 
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Roles } from 'src/auth/roles.decorator';
 import { Role } from '@prisma/client';
+import { HttpExceptionFilter } from 'src/filters/http-exception/http-exception.filter';
 
 @Controller('watch')
+@UseFilters(HttpExceptionFilter)
 @UseGuards(JwtAuthGuard, RolesGuard)
 // @Roles(Role.USER)
 export class WatchController {
