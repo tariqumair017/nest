@@ -80,8 +80,8 @@ JWT_SECRET=gjyg$%&*!$^*8^hgyu76eryskdtkmdgnrasgzd
       - npm i @nestjs/config   (for config environment variables)
       - app.modules.ts => import { ConfigModule } from '@nestjs/config';  => inside imports: [ConfigModule.forRoot({isGlobal: true})]
 - Install Mongoose (npm i @nestjs/mongoose mongoose)
-      - npm 
-
+- Embedding Relationship (Example: nest-mongodb/src/user [user and address])
+- Reference Relationship (Example: nest-mongodb/src/employee employee and profile])
 
 
 
