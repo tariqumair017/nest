@@ -84,6 +84,12 @@ JWT_SECRET=gjyg$%&*!$^*8^hgyu76eryskdtkmdgnrasgzd
 - Reference Relationship (Example: nest-mongodb/src/employee employee and profile])
 
 
+#############################
+Nest PostgreSQL with TypeORM
+#############################
+
+
+
 
 #############
 Commands
