@@ -1,9 +1,26 @@
 YT => https://www.youtube.com/watch?v=K_OjtrsJGTk&list=PL5OhSdfH4uDt6iG-qze_Q3qgik6VKHeRU
 
-// .env
-PORT=8888
+########################## 
+nest-mongodb-mongoose .env 
+##########################
+PORT=8002
+DATABASE_URL=mongodb://127.0.0.1:27017/nest-db
+JWT_SECRET=gjyg$%&*!$^*8^hgyu76eryskdtkmdgnrasgzd
+
+########################## 
+nest-postgres-prisma .env 
+##########################
+PORT=8001
 DATABASE_URL=postgresql://postgres:password@localhost:5432/nest-db
 JWT_SECRET=gjyg$%&*!$^*8^hgyu76eryskdtkmdgnrasgzd
+
+########################## 
+nest-postgres-typeorm .env
+##########################
+PORT=8003
+DATABASE_URL=postgresql://postgres:password@localhost:5432/nest-db
+JWT_SECRET=gjyg$%&*!$^*8^hgyu76eryskdtkmdgnrasgzd
+
 
 - Node.js (Run time environment for javascript. We install node.js in our system which will help javascript to run in our system. So conclusion is node.js runtime helps javascript to run out side the browser). 
 - Nest.js (Node.js framework for building efficient and scalable server side application. Built in TypeScript. Uses modular architecture for better organization)
