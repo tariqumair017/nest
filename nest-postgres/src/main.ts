@@ -12,6 +12,6 @@ async function bootstrap() {
     transformOptions: { enableImplicitConversion: true }
   }));
   app.setGlobalPrefix('api');
-  await app.listen(process.env.PORT ?? 8888);
+  await app.listen(process.env.PORT ?? 8001);
 }
 bootstrap();

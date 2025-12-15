@@ -79,6 +79,9 @@ JWT_SECRET=gjyg$%&*!$^*8^hgyu76eryskdtkmdgnrasgzd
 - Environment Variables
       - npm i @nestjs/config   (for config environment variables)
       - app.modules.ts => import { ConfigModule } from '@nestjs/config';  => inside imports: [ConfigModule.forRoot({isGlobal: true})]
+- Install Mongoose (npm i @nestjs/mongoose mongoose)
+      - npm 
+
 
 
 
