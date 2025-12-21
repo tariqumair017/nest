@@ -104,7 +104,17 @@ JWT_SECRET=gjyg$%&*!$^*8^hgyu76eryskdtkmdgnrasgzd
 #############################
 Nest PostgreSQL with TypeORM
 #############################
-
+- Why PostgreSQL when we have other SQL Databases:
+	- Power of PostgreSQL (SQL + NOSQL hybrid). It gives power of both SQL and NOSQL in one system.
+	- Also support NoSQL features like:
+		- JSON & JSONB colums
+		- Full text search
+		- Array and custom data types
+- TypeORM
+	- It connects your nest.js app to PostgreSQL using OOP style code
+	- We define tables as classes using decorators like @Entity, @Column, etc
+	- It makes database queries easier, readable and type-safe 
+- Connect Supabase PostgreSQL (YT: https://youtu.be/9vULzFAAxdg?si=Kk-ew-2DlBhiSstd)
 
 
 
