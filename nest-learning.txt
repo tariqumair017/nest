@@ -115,6 +115,17 @@ Nest PostgreSQL with TypeORM
 	- We define tables as classes using decorators like @Entity, @Column, etc
 	- It makes database queries easier, readable and type-safe 
 - Connect Supabase PostgreSQL (YT: https://youtu.be/9vULzFAAxdg?si=Kk-ew-2DlBhiSstd)
+- @nestjs/typeorm => @InjectRepository()
+	- Tells nest.js which entity will inject to the service
+	- export class EmployeeService {
+              constructor(
+                @InjectRepository(Employee)
+                private employeeRepository: Repository<Employee>,
+              ) {}
+- typeorm => Repository
+	- This Repository tells that you can perform crud/db operation on the entity (Employee)
+- ExecutionContext (inside auth guard)
+	- Tells us about request and response cycle of current request
 
 
 
