@@ -128,6 +128,24 @@ Nest PostgreSQL with TypeORM
 	- Tells us about request and response cycle of current request
 
 
+#######################################
+GraphQL (project: nest-graphql-mongodb)
+#######################################
+- What is GraphQL (modern approach to handle APIs)
+	- Developed by Facebook in 2012 (and in 2015 make it open source for everyone)
+	- In simple, GraphQL gives controller to request only data from server which client exactly need (nothing more or less)
+	- GraphQL is a query language for APIs
+	- Solves problems of over-fetching (too much data) and under-fetching (too little data) in REST APIs
+		- Example: Getting user profile might return posts, frineds, and settings, even if you just need name. But with GraphQL, you ask only for what you need
+		- Thats why we say Its, Faster, flexiable and efficient as compare to REST APIs
+	- Works on a single endpoint (single url), not multiple endpoints like REST 
+- Why Facebook developed it? when we have REST APIs
+	- To overcome over-fetching and under-fetching in REST APIs
+- npm i @nestjs/apollo (apollo is Graphql server, It helps to config Nest.js to Graphql)
+
+- In GraphQL, client request will hit to resolver (resolvers are controllers of GraphQL) and then resolver send it to service (as controller dose in simple nest)
+
+
 
 #############
 Commands
