@@ -16,6 +16,7 @@ import { join } from 'path';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
       playground: true,
+      context: ({ req, res }) => ({ req, res }),
     }),
     MongooseModule.forRoot(process.env.DATABASE_URL!),
     BookModule,

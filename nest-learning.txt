@@ -142,9 +142,10 @@ GraphQL (project: nest-graphql-mongodb)
 - Why Facebook developed it? when we have REST APIs
 	- To overcome over-fetching and under-fetching in REST APIs
 - npm i @nestjs/apollo (apollo is Graphql server, It helps to config Nest.js to Graphql)
-
 - In GraphQL, client request will hit to resolver (resolvers are controllers of GraphQL) and then resolver send it to service (as controller dose in simple nest)
-
+- Two types of decorator of @nestjs/graphql are very important for interview:
+	- import { Query } from '@nestjs/graphql';   used when we need to fetch data (In graphql we use @Query instead of @Get)
+	- import { Mutation } from '@nestjs/graphql';   used when we need to change data (In graphql we will use @Mutation instead of @Post, @Put, @Patch, @Delete)
 
 
 #############
