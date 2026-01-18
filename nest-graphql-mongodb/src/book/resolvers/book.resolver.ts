@@ -3,6 +3,7 @@ import { BookService } from '../book.service';
 import { Book } from '../model/book.model';
 import { CreateBookInput } from '../dto/create-book.input';
 import { UpdateBookInput } from '../dto/update-book.input';
+import { DeleteBookResponse } from '../dto/delete-book.response';
 
 @Resolver(() => Book)
 export class BookResolver {
@@ -28,7 +29,7 @@ export class BookResolver {
         return this.bookService.update(input);
     }
 
-    @Mutation(() => Book)
+    @Mutation(() => DeleteBookResponse)
     async removeBook(@Args('id', {type: () => String}) id: string) {
         return this.bookService.remove(id);
     }

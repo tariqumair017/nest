@@ -6,6 +6,6 @@ import { Book, BookSchema } from './model/book.model';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: Book.name, schema: BookSchema }])],
-  providers: [BookService, BookResolver]
+  providers: [BookResolver, BookService]
 })
 export class BookModule {}

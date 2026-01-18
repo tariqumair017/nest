@@ -148,6 +148,16 @@ GraphQL (project: nest-graphql-mongodb)
 	- import { Mutation } from '@nestjs/graphql';   used when we need to change data (In graphql we will use @Mutation instead of @Post, @Put, @Patch, @Delete)
 
 
+#######################################
+Prisma (project: )
+#######################################
+- Prisma:
+	- Modern ORM (connect your backend with database with in a structured and type safe way)
+	- Think of it as a translator between app and database
+	- Like things which take time and are complex with typeORM, Prisma makes it very easy (more structured and secure than typeORM)
+
+
+
 #############
 Commands
 ############

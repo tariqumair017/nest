@@ -15,9 +15,13 @@ input CreateBookInput {
   title: String!
 }
 
+type DeleteBookResponse {
+  message: String!
+}
+
 type Mutation {
   createBook(input: CreateBookInput!): Book!
-  removeBook(id: String!): Book!
+  removeBook(id: String!): DeleteBookResponse!
   updateBook(input: UpdateBookInput!): Book!
 }
 
