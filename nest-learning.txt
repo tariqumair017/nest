@@ -149,13 +149,32 @@ GraphQL (project: nest-graphql-mongodb)
 
 
 #######################################
-Prisma (project: )
+Prisma (project:nest-graph )
 #######################################
 - Prisma:
 	- Modern ORM (connect your backend with database with in a structured and type safe way)
 	- Think of it as a translator between app and database
 	- Like things which take time and are complex with typeORM, Prisma makes it very easy (more structured and secure than typeORM)
+- Neon DB:
+	- Neon is free, serverless, PostgreSQL database in cloud
+	- Don't need to install PostgreSQL locally
+	- just signup, get your DB URL, and ready to go
+- Why Prisma + Neon are Perfect Combo
+	- Both are fast, scaleable and easy to setup
+	- No need local setup
+- npm i prisma --save-dev
+- npm i @prisma/client
+- npx prisma init  (no need to config .env when using prisma)
+- After register Neon DB, update DB URL in .env and check connection (npx prisma db push)
+- Then "npx prisma generate": This creates client in node_modules, now I can play with DB
 
+
+#######################################
+Rate Limiting Using Throttler
+#######################################
+- Rate Limiting Using Throttler
+	- npm i @nestjs/throttler
+	- Implemented in project "nest-postgres-prisma" 	
 
 
 #############

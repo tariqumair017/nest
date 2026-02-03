@@ -1,6 +1,7 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { IsEmail, IsInt, IsNotEmpty, IsOptional, IsPhoneNumber, IsString, Min, MinLength } from 'class-validator';
+import { Throttle } from '@nestjs/throttler';
 
 class SignUpDto {
   @IsEmail()
@@ -44,6 +45,7 @@ export class AuthController {
  
   @HttpCode(HttpStatus.OK)
   @Post('login')
+  @Throttle({ default: {limit: 3, ttl: 60000} })
   async signIn(@Body() dto: SignInDto) {
     return this.authService.signIn(dto.emailOrPhone, dto.password);
   }
